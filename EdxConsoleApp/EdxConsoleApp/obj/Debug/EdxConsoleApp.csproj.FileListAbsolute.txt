@@ -4,3 +4,9 @@ X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxCons
 X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.csprojResolveAssemblyReference.cache
 X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.exe
 X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.pdb
+C:\Curso C# Programming [Microsoft]\EdxCSharp\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxConsoleApp.exe.config
+C:\Curso C# Programming [Microsoft]\EdxCSharp\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.exe
+C:\Curso C# Programming [Microsoft]\EdxCSharp\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.pdb
+C:\Curso C# Programming [Microsoft]\EdxCSharp\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxConsoleApp.exe
+C:\Curso C# Programming [Microsoft]\EdxCSharp\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxConsoleApp.pdb
+C:\Curso C# Programming [Microsoft]\EdxCSharp\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.csprojResolveAssemblyReference.cache
