@@ -1,0 +1,6 @@
+X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxConsoleApp.exe.config
+X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxConsoleApp.exe
+X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\bin\Debug\EdxConsoleApp.pdb
+X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.csprojResolveAssemblyReference.cache
+X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.exe
+X:\Documentos\VisualStudioProjects\EdxConsoleApp\EdxConsoleApp\obj\Debug\EdxConsoleApp.pdb
