@@ -6,203 +6,195 @@ using System.Threading.Tasks;
 
 namespace EdxConsoleApplication
 {
+
+    /**
+     * Student information, such as: First Name, Last Name, Birthdate, Address, City, State/Province, Zip/Postal, Country
+     */
+    public struct Student
+    {
+        public string firstName;
+        public string lastName;
+        public DateTime birthdate;
+        public string address;
+        public string city;
+        public string stateOrProvince;
+        public string zipCode;
+        public string country;
+
+        public Student(string firstName, string lastName, DateTime birthdate, string address, string city, string stateOrProvince, string zipCode, string country)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.birthdate = birthdate;
+            this.address = address;
+            this.city = city;
+            this.stateOrProvince = stateOrProvince;
+            this.zipCode = zipCode;
+            this.country = country;
+        }
+    }
+
+    /**
+     * Professor information with pertinent fields
+     */
+    public struct Professor
+    {
+        public string firstName;
+        public string lastName;
+        public DateTime birthdate;
+        public string address;
+        public string city;
+        public string stateOrProvince;
+        public string zipCode;
+        public string country;
+
+        public Professor(string firstName, string lastName, DateTime birthdate, string address, string city, string stateOrProvince, string zipCode, string country)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.birthdate = birthdate;
+            this.address = address;
+            this.city = city;
+            this.stateOrProvince = stateOrProvince;
+            this.zipCode = zipCode;
+            this.country = country;
+        }
+    }
+
+    /**
+     * Information for a course that would be part of your selected degree and program, with pertinent fields
+     */
+    public struct Course
+    {
+        public string name;
+        public string description;
+        public int credits;
+        public string degree;
+        public bool hasStarted;
+
+        public Course(string name, string description, int credits, string degree, bool hasStarted)
+        {
+            this.name = name;
+            this.description = description;
+            this.credits = credits;
+            this.degree = degree;
+            this.hasStarted = hasStarted;
+        }
+    }
+
+    /**
+     * A university degree with pertinent fields
+     */
+    public struct Degree
+    {
+        public string name;
+        public string description;
+        public int credits;
+
+        public Degree(string name, string description, int credits)
+        {
+            this.name = name;
+            this.description = description;
+            this.credits = credits;
+        }
+    }
+
+    /**
+     * A university program with pertinent fields
+     */
+    public struct UniversityProgram
+    {
+        public string name;
+        public string degrees;
+        public string headDepartment;
+
+        public UniversityProgram(string name, string degrees, string headDepartment)
+        {
+            this.name = name;
+            this.degrees = degrees;
+            this.headDepartment = headDepartment;
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            GetStudentInfo();
-            GetProfessorInfo();
-            GetCourseInfo();
-            GetDegreeInfo();
-            GetProgramInfo();
+            // Variable definition
+            Student[] students;
 
+            // Var initialization
+            students = new Student[5];
+
+            // Students info initialization (in loop, same data for all of them, but using loop index to distinguish)
+            for (int i = 0; i < 5; i++)
+            {
+                int humanCardinal = i + 1;
+                students[i] = new Student("Student " + humanCardinal, "Fullname", new DateTime(1982, 12, humanCardinal), "5C, 46, Mieses Street", "Cadiz", "Andalucia", "11111", "Spain");
+            }
+
+            // Students info visualization in console
+            for (int i = 0; i < 5; i++)
+            {
+                PrintStudentDetails(students[i]);
+            }
+
+            // Warn user about finalization and wait...
             Console.Write("Press any key to close this window...");
             Console.ReadKey();
-
-            ValidateBirthDate("");
         }
 
-        static void GetStudentInfo()
-        {
-            // Student information, such as: First Name, Last Name, Birthdate, Address, City, State/Province, Zip/Postal, Country
-            string firstName;
-            string lastName;
-            DateTime birthdate;
-            string address;
-            string city;
-            string stateOrProvince;
-            string zipCode;
-            string country;
-
-            Console.WriteLine("Enter the student's first name: ");
-            firstName = Console.ReadLine();
-            Console.WriteLine("Enter the student's last name: ");
-            lastName = Console.ReadLine();
-            Console.WriteLine("Enter the student's birth date: ");
-            string birthdateStr = Console.ReadLine();
-            birthdate = DateTime.Parse(birthdateStr);
-            Console.WriteLine("Enter the student's address: ");
-            address = Console.ReadLine();
-            Console.WriteLine("Enter the student's city: ");
-            city = Console.ReadLine();
-            Console.WriteLine("Enter the student's state/province: ");
-            stateOrProvince = Console.ReadLine();
-            Console.WriteLine("Enter the student's zip code: ");
-            zipCode = Console.ReadLine();
-            Console.WriteLine("Enter the student's country: ");
-            country = Console.ReadLine();
-
-            PrintStudentDetails(firstName, lastName, address, zipCode, city, stateOrProvince, country, birthdate);
-        }
-
-        static void PrintStudentDetails(string first, string last, string address, string zipCode, string city, string stateOrProvince, string country, DateTime birthday)
+        static void PrintStudentDetails(Student student)
         {
             Console.WriteLine();
             Console.WriteLine("Student information:");
-            Console.WriteLine("Full name: {0} {1}", first, last);
-            Console.WriteLine("Full address: {0}, {1}, {2}, {3}, {4}", address, zipCode, city, stateOrProvince, country);
-            Console.WriteLine("Birthdate: {0}", birthday);
+            Console.WriteLine("Full name: {0} {1}", student.firstName, student.lastName);
+            Console.WriteLine("Full address: {0}, {1}, {2}, {3}, {4}", student.address, student.zipCode, student.city, student.stateOrProvince, student.country);
+            Console.WriteLine("Birthdate: {0}", student.birthdate);
             Console.WriteLine();
         }
 
-        static void GetProfessorInfo()
-        {
-            // Professor information with pertinent fields
-            string firstName;
-            string lastName;
-            DateTime birthdate;
-            string address;
-            string city;
-            string stateOrProvince;
-            string zipCode;
-            string country;
-
-            Console.WriteLine("Enter the professor's first name: ");
-            firstName = Console.ReadLine();
-            Console.WriteLine("Enter the professor's last name: ");
-            lastName = Console.ReadLine();
-            Console.WriteLine("Enter the professor's birth date: ");
-            string birthdateStr = Console.ReadLine();
-            birthdate = DateTime.Parse(birthdateStr);
-            Console.WriteLine("Enter the professor's address: ");
-            address = Console.ReadLine();
-            Console.WriteLine("Enter the professor's city: ");
-            city = Console.ReadLine();
-            Console.WriteLine("Enter the professor's state/province: ");
-            stateOrProvince = Console.ReadLine();
-            Console.WriteLine("Enter the professor's zip code: ");
-            zipCode = Console.ReadLine();
-            Console.WriteLine("Enter the professor's country: ");
-            country = Console.ReadLine();
-
-            PrintProfessorDetails(firstName, lastName, address, zipCode, city, stateOrProvince, country, birthdate);
-        }
-
-        static void PrintProfessorDetails(string first, string last, string address, string zipCode, string city, string stateOrProvince, string country, DateTime birthday)
+        static void PrintProfessorDetails(Professor professor)
         {
             Console.WriteLine();
             Console.WriteLine("Professor information:");
-            Console.WriteLine("Full name: {0} {1}", first, last);
-            Console.WriteLine("Full address: {0}, {1}, {2}, {3}, {4}", address, zipCode, city, stateOrProvince, country);
-            Console.WriteLine("Birthdate: {0}", birthday);
+            Console.WriteLine("Full name: {0} {1}", professor.firstName, professor.lastName);
+            Console.WriteLine("Full address: {0}, {1}, {2}, {3}, {4}", professor.address, professor.zipCode, professor.city, professor.stateOrProvince, professor.country);
+            Console.WriteLine("Birthdate: {0}", professor.birthdate);
             Console.WriteLine();
         }
 
-        static void GetCourseInfo()
-        {
-            // Information for a course that would be part of your selected degree and program, with pertinent fields
-            string name;
-            string description;
-            int credits;
-            string degree;
-            bool hasStarted;
-
-            Console.WriteLine("Enter the course's name: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Enter the course's description: ");
-            description = Console.ReadLine();
-            Console.WriteLine("Enter the course's credits: ");
-            string creditsStr = Console.ReadLine();
-            credits = Convert.ToInt32(creditsStr);
-            Console.WriteLine("Enter the course's degree: ");
-            degree = Console.ReadLine();
-            Console.WriteLine("Has the course started? [Y/N] ");
-            string hasStartedStr = Console.ReadLine();
-            hasStarted = "Y".Equals(hasStartedStr) ? true : false;
-            
-            PrintCourseDetails(name, description, credits, degree, hasStarted);
-        }
-
-        static void PrintCourseDetails(string name, string description, int credits, string degree, bool hasStarted)
+        static void PrintCourseDetails(Course course)
         {
             Console.WriteLine();
             Console.WriteLine("Course information:");
-            Console.WriteLine("Name: {0}", name);
-            Console.WriteLine("Description: {0}", description);
-            Console.WriteLine("Credits: {0}", credits);
-            Console.WriteLine("Degree: {0}", degree);
-            Console.WriteLine("Has started? {0}", hasStarted ? "Yes" : "No");
+            Console.WriteLine("Name: {0}", course.name);
+            Console.WriteLine("Description: {0}", course.description);
+            Console.WriteLine("Credits: {0}", course.credits);
+            Console.WriteLine("Degree: {0}", course.degree);
+            Console.WriteLine("Has started? {0}", course.hasStarted ? "Yes" : "No");
             Console.WriteLine();
         }
 
-        static void GetDegreeInfo()
-        {
-            // A university degree with pertinent fields
-            string name;
-            string description;
-            int credits;
-
-            Console.WriteLine("Enter the degree's name: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Enter the degree's description: ");
-            description = Console.ReadLine();
-            Console.WriteLine("Enter the degree's credits: ");
-            string creditsStr = Console.ReadLine();
-            credits = Convert.ToInt32(creditsStr);
-
-            PrintDegreeDetails(name, description, credits);
-        }
-
-        static void PrintDegreeDetails(string name, string description, int credits)
+        static void PrintDegreeDetails(Degree degree)
         {
             Console.WriteLine();
             Console.WriteLine("Degree information:");
-            Console.WriteLine("Name: {0}", name);
-            Console.WriteLine("Description: {0}", description);
-            Console.WriteLine("Credits: {0}", credits);
+            Console.WriteLine("Name: {0}", degree.name);
+            Console.WriteLine("Description: {0}", degree.description);
+            Console.WriteLine("Credits: {0}", degree.credits);
             Console.WriteLine();
         }
 
-        static void GetProgramInfo()
-        {
-            // A university program with pertinent fields
-            string name;
-            string degrees;
-            string headDepartment;
-
-            Console.WriteLine("Enter the program's name: ");
-            name = Console.ReadLine();
-            Console.WriteLine("Enter the program's degrees: ");
-            degrees = Console.ReadLine();
-            Console.WriteLine("Enter the program's head department: ");
-            headDepartment = Console.ReadLine();
-
-            PrintProgramDetails(name, degrees, headDepartment);
-        }
-
-        static void PrintProgramDetails(string name, string degrees, string headDepartment)
+        static void PrintProgramDetails(UniversityProgram program)
         {
             Console.WriteLine();
             Console.WriteLine("Program information:");
-            Console.WriteLine("Name: {0}", name);
-            Console.WriteLine("Degrees: {0}", degrees);
-            Console.WriteLine("Department Head: {0}", headDepartment);
+            Console.WriteLine("Name: {0}", program.name);
+            Console.WriteLine("Degrees: {0}", program.degrees);
+            Console.WriteLine("Department Head: {0}", program.headDepartment);
             Console.WriteLine();
         }
 
-        static void ValidateBirthDate(string birthdateStr)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
