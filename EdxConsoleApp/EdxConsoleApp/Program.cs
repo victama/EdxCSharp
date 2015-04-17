@@ -154,47 +154,5 @@ namespace EdxConsoleApplication
             Console.WriteLine();
         }
 
-        static void PrintProfessorDetails(Professor professor)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Professor information:");
-            Console.WriteLine("Full name: {0} {1}", professor.firstName, professor.lastName);
-            Console.WriteLine("Full address: {0}, {1}, {2}, {3}, {4}", professor.address, professor.zipCode, professor.city, professor.stateOrProvince, professor.country);
-            Console.WriteLine("Birthdate: {0}", professor.birthdate);
-            Console.WriteLine();
-        }
-
-        static void PrintCourseDetails(Course course)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Course information:");
-            Console.WriteLine("Name: {0}", course.name);
-            Console.WriteLine("Description: {0}", course.description);
-            Console.WriteLine("Credits: {0}", course.credits);
-            Console.WriteLine("Degree: {0}", course.degree);
-            Console.WriteLine("Has started? {0}", course.hasStarted ? "Yes" : "No");
-            Console.WriteLine();
-        }
-
-        static void PrintDegreeDetails(Degree degree)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Degree information:");
-            Console.WriteLine("Name: {0}", degree.name);
-            Console.WriteLine("Description: {0}", degree.description);
-            Console.WriteLine("Credits: {0}", degree.credits);
-            Console.WriteLine();
-        }
-
-        static void PrintProgramDetails(UniversityProgram program)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Program information:");
-            Console.WriteLine("Name: {0}", program.name);
-            Console.WriteLine("Degrees: {0}", program.degrees);
-            Console.WriteLine("Department Head: {0}", program.headDepartment);
-            Console.WriteLine();
-        }
-
     }
 }
