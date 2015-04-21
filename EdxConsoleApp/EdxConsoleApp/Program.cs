@@ -4,17 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/**
+ * I preferred the use of inner classes instead of one file per class due to MOOC's upload system.
+ * 
+ * 7. Share your code for feedback and ideas with your fellow students such as:
+ * 7.1. What other objects could benefit from inheritance in this code?
+ * 
+ * "Program", "Degree" and "Course" are all three "University Terms", and if we inspect their fields
+ * we'll see at least "name" and "description" in common. We could create a "UniversityTerm" class
+ * and make them inherit from it. We could even create a "CreditableEntity" class and make "Course"
+ * and "Degree" inherit from it, because they have "credits" field in common.
+ * 
+ * In real life, this inheritance hierarchy would be an overkill, and we could probably give better
+ * names to new classes suggested, but they are only to ilustrate my answer to this question.
+ * 
+ * 7.2. Can you think of a different hierarchy for the Person, Teacher, and Student?  What is it?
+ * 
+ * This hierarchy could be extended with the figure of a "HeadDepartment", field that was mentioned
+ * possibly associated with a "UProgram". It should be a Teacher, so the hierarchy would be:
+ * 
+ * Student : Person (Student inherits from Person)
+ * HeadDepartment : Teacher : Person (HeadDepartment inherits from Teacher, that inherits from Person)
+ */
 namespace EdxConsoleApplication
 {
-
     /**
-     * Student information, such as: First Name, Last Name, Birthdate, Address
+     * 1. Create a Person base class with common attributes for a person
      */
-    public class Student
+    public class Person
     {
-        // public static class variable with number of Student instances
-        public static int Enrolled { get; set; }
-
         // private fields
         private string firstName;
         private string lastName;
@@ -26,7 +44,20 @@ namespace EdxConsoleApplication
         public string LastName { get { return lastName; } set { lastName = value; } }
         public DateTime Birthdate { get { return birthdate; } set { birthdate = value; } }
         public string Address { get { return address; } set { address = value; } }
+    }
 
+    /**
+     * Student information, such as: First Name, Last Name, Birthdate, Address.
+     * 
+     * 2. Make your Student and Teacher classes inherit from the Person base class
+     */
+    public class Student : Person
+    {
+        // public static class variable with number of Student instances
+        public static int Enrolled { get; set; }
+
+        // 3. Modify your Student and Teacher classes so that they inherit the common attributes from Person
+        //    Attributes are available, as demonstrated by using them here
         public Student(string firstName, string lastName, DateTime birthdate, string address)
         {
             this.FirstName = firstName;
@@ -35,31 +66,37 @@ namespace EdxConsoleApplication
             this.Address = address;
             Enrolled++;
         }
+
+        // 4. Modify your Student and Teacher classes so they include characteristics specific to their type.
+        //    For example, a Student might have a TakeTest() method
+        public void TakeTest()
+        {
+            Console.WriteLine("Student {0} {1} took a grade!", FirstName, LastName);
+        }
     }
 
     /**
      * Teacher information with pertinent fields
+     * 
+     * 2. Make your Student and Teacher classes inherit from the Person base class
      */
-    public class Teacher
+    public class Teacher : Person
     {
-        // private fields
-        private string firstName;
-        private string lastName;
-        private DateTime birthdate;
-        private string address;
-
-        // properties encapsulating fields
-        public string FirstName { get { return firstName; } set { firstName = value; } }
-        public string LastName { get { return lastName; } set { lastName = value; } }
-        public DateTime Birthdate { get { return birthdate; } set { birthdate = value; } }
-        public string Address { get { return address; } set { address = value; } }
-
+        // 3. Modify your Student and Teacher classes so that they inherit the common attributes from Person
+        //    Attributes are available, as demonstrated by using them here
         public Teacher(string firstName, string lastName, DateTime birthdate, string address)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Birthdate = birthdate;
             this.Address = address;
+        }
+
+        // 4. Modify your Student and Teacher classes so they include characteristics specific to their type.
+        //    For example, a Teacher object might have a GradeTest() method
+        public void GradeTest()
+        {
+            Console.WriteLine("Teacher {0} {1} tested a grade!", FirstName, LastName);
         }
     }
 
