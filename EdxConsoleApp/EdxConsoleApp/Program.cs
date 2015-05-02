@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 /**
  * I preferred the use of inner classes instead of one file per class due to MOOC's upload system.
  * Grading Criteria critical points are commented with numbers in code, e.g.:
- * "private ArrayList students; // 1. Used an ArrayList of Students, inside the Course object."
+ * "private List<Student> students; // 1. Used a List<T> collection of the proper data type, inside the Course object."
  */
 namespace EdxConsoleApplication
 {
@@ -38,7 +37,7 @@ namespace EdxConsoleApplication
         // Public static class variable with number of Student instances.
         public static int Enrolled { get; set; }
 
-        public Stack Grades { get; set; } // 2. Added a Stack called Grades inside the Student object.
+        public Stack<double> Grades { get; set; } // 2. Added a Stack<T> of the proper data type, called Grades, inside the Student object.
 
         public Student(string firstName, string lastName, DateTime birthdate, string address)
         {
@@ -46,7 +45,7 @@ namespace EdxConsoleApplication
             this.LastName = lastName;
             this.Birthdate = birthdate;
             this.Address = address;
-            this.Grades = new Stack();
+            this.Grades = new Stack<double>();
             Enrolled++;
         }
 
@@ -88,7 +87,7 @@ namespace EdxConsoleApplication
         private int credits;
         private Degree degree;
         private bool hasStarted;
-        private ArrayList students; // 1. Used an ArrayList of Students, inside the Course object.
+        private List<Student> students; // 1. Used a List<T> collection of the proper data type, inside the Course object.
         private Teacher[] teachers;
 
         // Properties encapsulating fields.
@@ -97,7 +96,7 @@ namespace EdxConsoleApplication
         public int Credits { get { return credits; } set { credits = value; } }
         public Degree Degree { get { return degree; } set { degree = value; } }
         public bool HasStarted { get { return hasStarted; } set { hasStarted = value; } }
-        public ArrayList Students { get { return students; } set { students = value; } }
+        public List<Student> Students { get { return students; } set { students = value; } }
 
         public Course(string name, string description, int credits, bool hasStarted)
         {
@@ -105,7 +104,7 @@ namespace EdxConsoleApplication
             this.Description = description;
             this.Credits = credits;
             this.HasStarted = hasStarted;
-            this.Students = new ArrayList();
+            this.Students = new List<Student>();
         }
 
         public bool AddTeacher(Teacher teacher)
@@ -194,7 +193,7 @@ namespace EdxConsoleApplication
                     double grade = Math.Round(seed.NextDouble() * 10.0, 2);
                     student.Grades.Push(grade);
                 }
-                course.Students.Add(student); // 3. Added 3 Student objects to this ArrayList using the ArrayList method for adding objects.
+                course.Students.Add(student); // 3. Added 3 Student objects to this List<T> using the List<T> method for adding objects.
             }
             teacher = new Teacher("Valeria", "Mazza", new DateTime(1972, 2, 17), "69, Calle del Rosario, Santa Fe, Argentina");
             course.AddTeacher(teacher);
@@ -214,9 +213,8 @@ namespace EdxConsoleApplication
 
         static void ListStudents(Course course)
         {
-            foreach (Object obj in course.Students) // 4. Used a foreach loop to output the first and last name of each Student in the ArrayList.
+            foreach (Student student in course.Students) // 4. Used a foreach loop to output the first and last name of each Student in the List<T>.
             {
-                Student student = (Student)obj; // 5. Cast the object from the ArrayList to Student, inside the foreach loop, before printing out the name information.
                 Console.WriteLine("Student's '{0} {1}' last grade was {2}", student.FirstName, student.LastName, student.Grades.Peek());
             }
         }
