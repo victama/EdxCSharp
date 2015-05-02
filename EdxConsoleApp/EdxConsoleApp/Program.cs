@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,40 +7,23 @@ using System.Threading.Tasks;
 
 /**
  * I preferred the use of inner classes instead of one file per class due to MOOC's upload system.
- * 
- * 7. Share your code for feedback and ideas with your fellow students such as:
- * 7.1. What other objects could benefit from inheritance in this code?
- * 
- * "Program", "Degree" and "Course" are all three "University Terms", and if we inspect their fields
- * we'll see at least "name" and "description" in common. We could create a "UniversityTerm" class
- * and make them inherit from it. We could even create a "CreditableEntity" class and make "Course"
- * and "Degree" inherit from it, because they have "credits" field in common.
- * 
- * In real life, this inheritance hierarchy would be an overkill, and we could probably give better
- * names to new classes suggested, but they are only to ilustrate my answer to this question.
- * 
- * 7.2. Can you think of a different hierarchy for the Person, Teacher, and Student?  What is it?
- * 
- * This hierarchy could be extended with the figure of a "HeadDepartment", field that was mentioned
- * possibly associated with a "UProgram". It should be a Teacher, so the hierarchy would be:
- * 
- * Student : Person (Student inherits from Person)
- * HeadDepartment : Teacher : Person (HeadDepartment inherits from Teacher, that inherits from Person)
+ * Grading Criteria critical points are commented with numbers in code, e.g.:
+ * "private ArrayList students; // 1. Used an ArrayList of Students, inside the Course object."
  */
 namespace EdxConsoleApplication
 {
     /**
-     * 1. Create a Person base class with common attributes for a person
+     * Person base class with common attributes for a person.
      */
     public class Person
     {
-        // private fields
+        // Private fields.
         private string firstName;
         private string lastName;
         private DateTime birthdate;
         private string address;
 
-        // properties encapsulating fields
+        // Properties encapsulating fields.
         public string FirstName { get { return firstName; } set { firstName = value; } }
         public string LastName { get { return lastName; } set { lastName = value; } }
         public DateTime Birthdate { get { return birthdate; } set { birthdate = value; } }
@@ -47,28 +31,26 @@ namespace EdxConsoleApplication
     }
 
     /**
-     * Student information, such as: First Name, Last Name, Birthdate, Address.
-     * 
-     * 2. Make your Student and Teacher classes inherit from the Person base class
+     * Student information, such as: First Name, Last Name, Birthdate, Address. Inherits from the Person base class.
      */
     public class Student : Person
     {
-        // public static class variable with number of Student instances
+        // Public static class variable with number of Student instances.
         public static int Enrolled { get; set; }
 
-        // 3. Modify your Student and Teacher classes so that they inherit the common attributes from Person
-        //    Attributes are available, as demonstrated by using them here
+        public Stack Grades { get; set; } // 2. Added a Stack called Grades inside the Student object.
+
         public Student(string firstName, string lastName, DateTime birthdate, string address)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Birthdate = birthdate;
             this.Address = address;
+            this.Grades = new Stack();
             Enrolled++;
         }
 
-        // 4. Modify your Student and Teacher classes so they include characteristics specific to their type.
-        //    For example, a Student might have a TakeTest() method
+        // Student might have a TakeTest() method.
         public void TakeTest()
         {
             Console.WriteLine("Student {0} {1} took a grade!", FirstName, LastName);
@@ -76,14 +58,10 @@ namespace EdxConsoleApplication
     }
 
     /**
-     * Teacher information with pertinent fields
-     * 
-     * 2. Make your Student and Teacher classes inherit from the Person base class
+     * Teacher information with pertinent fields. Inherits from the Person base class.
      */
     public class Teacher : Person
     {
-        // 3. Modify your Student and Teacher classes so that they inherit the common attributes from Person
-        //    Attributes are available, as demonstrated by using them here
         public Teacher(string firstName, string lastName, DateTime birthdate, string address)
         {
             this.FirstName = firstName;
@@ -92,8 +70,7 @@ namespace EdxConsoleApplication
             this.Address = address;
         }
 
-        // 4. Modify your Student and Teacher classes so they include characteristics specific to their type.
-        //    For example, a Teacher object might have a GradeTest() method
+        // Teacher object might have a GradeTest() method.
         public void GradeTest()
         {
             Console.WriteLine("Teacher {0} {1} tested a grade!", FirstName, LastName);
@@ -101,26 +78,26 @@ namespace EdxConsoleApplication
     }
 
     /**
-     * Information for a course that would be part of your selected degree and program, with pertinent fields
+     * Information for a course that would be part of your selected degree and program, with pertinent fields.
      */
     public class Course
     {
-        // private fields
+        // Private fields.
         private string name;
         private string description;
         private int credits;
         private Degree degree;
         private bool hasStarted;
-
-        private Student[] students;
+        private ArrayList students; // 1. Used an ArrayList of Students, inside the Course object.
         private Teacher[] teachers;
 
-        // properties encapsulating fields
+        // Properties encapsulating fields.
         public string Name { get { return name; } set { name = value; } }
         public string Description { get { return description; } set { description = value; } }
         public int Credits { get { return credits; } set { credits = value; } }
         public Degree Degree { get { return degree; } set { degree = value; } }
         public bool HasStarted { get { return hasStarted; } set { hasStarted = value; } }
+        public ArrayList Students { get { return students; } set { students = value; } }
 
         public Course(string name, string description, int credits, bool hasStarted)
         {
@@ -128,21 +105,7 @@ namespace EdxConsoleApplication
             this.Description = description;
             this.Credits = credits;
             this.HasStarted = hasStarted;
-        }
-
-        public bool AddStudent(Student student)
-        {
-            if (student == null) throw new ArgumentNullException();
-            if (students == null) students = new Student[3];
-            for (int i = 0; i < students.Length; i++)
-            {
-                if (students[i] == null)
-                {
-                    students[i] = student;
-                    return true;
-                }
-            }
-            return false;
+            this.Students = new ArrayList();
         }
 
         public bool AddTeacher(Teacher teacher)
@@ -162,17 +125,17 @@ namespace EdxConsoleApplication
     }
 
     /**
-     * A university degree with pertinent fields
+     * A university degree with pertinent fields.
      */
     public class Degree
     {
-        // private fields
+        // Private fields.
         private string name;
         private string description;
         private int credits;
         private Course course;
 
-        // properties encapsulating fields
+        // Properties encapsulating fields.
         public string Name { get { return name; } set { name = value; } }
         public string Description { get { return description; } set { description = value; } }
         public int Credits { get { return credits; } set { credits = value; } }
@@ -187,16 +150,16 @@ namespace EdxConsoleApplication
     }
 
     /**
-     * A university program with pertinent fields
+     * A university program with pertinent fields.
      */
     public class UProgram
     {
-        // private fields
+        // Private fields.
         private string name;
         private Teacher headDepartment;
         private Degree degree;
 
-        // properties encapsulating fields
+        // Properties encapsulating fields.
         public string Name { get { return name; } set { name = value; } }
         public Degree Degree { get { return degree; } set { degree = value; } }
         public Teacher HeadDepartment { get { return headDepartment; } set { headDepartment = value; } }
@@ -212,19 +175,26 @@ namespace EdxConsoleApplication
     {
         static void Main(string[] args)
         {
-            // Variable definition
+            // variable definition
             Teacher teacher;
             Course course;
             Degree degree;
             UProgram program;
 
-            // Variable initialization
+            // variable initialization
             course = new Course("Programming with C#", "Let's learn to program in C# with M$!", 40, true);
+            Random seed = new Random();
             for (int i = 0; i < 3; i++)
             {
                 int humanCardinal = i + 1;
-                Student student = new Student("Student " + humanCardinal, "Fullname", new DateTime(1982, 12, humanCardinal), "5C, 46, Mieses Street, Cadiz, Spain");
-                course.AddStudent(student);
+                Student student = new Student("Student " + humanCardinal, "Fullname " + humanCardinal, new DateTime(1982, 12, humanCardinal), "5C, 46, Mieses Street, Cadiz, Spain");
+                // add 5 grades to the the Stack in the each Student object
+                for (int j = 0; j < 5; j++)
+                {
+                    double grade = Math.Round(seed.NextDouble() * 10.0, 2);
+                    student.Grades.Push(grade);
+                }
+                course.Students.Add(student); // 3. Added 3 Student objects to this ArrayList using the ArrayList method for adding objects.
             }
             teacher = new Teacher("Valeria", "Mazza", new DateTime(1972, 2, 17), "69, Calle del Rosario, Santa Fe, Argentina");
             course.AddTeacher(teacher);
@@ -234,26 +204,21 @@ namespace EdxConsoleApplication
             program = new UProgram("Information Technology", teacher);
             program.Degree = degree;
 
-            // Using Console.WriteLine statements, output the following information to the console window:
-            // - The name of the program and the degree it contains
-            // - The name of the course in the degree
-            // - The count of the number of students in the course.
-            PrintDetails(program);
+            // using Console.WriteLine statements, output information to the console
+            ListStudents(course);
 
-            // Warn user about finalization and wait...
+            // warn user about finalization and wait...
             Console.Write("Press any key to continue . . .");
             Console.ReadKey();
         }
 
-        static void PrintDetails(UProgram program)
+        static void ListStudents(Course course)
         {
-            Console.WriteLine();
-            Console.WriteLine("The {0} program contains the {1} degree", program.Name, program.Degree.Name);
-            Console.WriteLine();
-            Console.WriteLine("The {0} degree contains the course {1}", program.Degree.Name, program.Degree.Course.Name);
-            Console.WriteLine();
-            Console.WriteLine("The {0} course contains {1} student(s)", program.Degree.Course.Name, Student.Enrolled);
-            Console.WriteLine();
+            foreach (Object obj in course.Students) // 4. Used a foreach loop to output the first and last name of each Student in the ArrayList.
+            {
+                Student student = (Student)obj; // 5. Cast the object from the ArrayList to Student, inside the foreach loop, before printing out the name information.
+                Console.WriteLine("Student's '{0} {1}' last grade was {2}", student.FirstName, student.LastName, student.Grades.Peek());
+            }
         }
 
     }
